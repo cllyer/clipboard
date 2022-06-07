@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.2/dayjs.min.js"></script>
+  <title>Document</title>
+  <style>
+    #datetime {
+      display: inline-block;
+      color: #4b0;
+      padding: 10px;
+      border: 1px solid #4b0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="datetime"></div>
+  <script>
+    const clipboard = new ClipboardJS('#datetime', {
+      text: function(trigger) {
+        return trigger.innerHTML
+      }
+    })
+    clipboard.on('success', function(e) {
+      e.clearSelection()
+    })
+
+    setTime()
+    function setTime () {
+      document.querySelector('#datetime').innerHTML = dayjs().format('YYYY-MM-DD HH:mm:ss')
+      setTimeout(setTime, 1000)
+    }
+  </script>
+</body>
+</html>
